@@ -4,4 +4,4 @@
   documentation
 </p>
 
-<button type="button" class="btn preset-filled">Button</button>
+<a href="/auth/login" class="btn preset-filled">Login</a>

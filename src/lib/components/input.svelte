@@ -3,7 +3,7 @@
     name: string;
     type: "password" | "email" | "text";
     placeholder: string;
-    value: any;
+    value?: any;
     required?: boolean;
     direction?: "vertical" | "horizontal";
   }
@@ -12,7 +12,7 @@
     name,
     type,
     placeholder,
-    value,
+    value = $bindable(),
     required = false,
     direction = "vertical",
   }: Props = $props();
@@ -30,6 +30,7 @@
   <input
     bind:value
     id={name}
+    {type}
     {name}
     {placeholder}
     {required}

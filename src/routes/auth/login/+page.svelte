@@ -1,30 +1,8 @@
 <script lang="ts">
-  import { goto } from "$app/navigation";
   import Button from "$lib/components/button.svelte";
   import Input from "$lib/components/input.svelte";
 
-  let email = "";
-  let password = "";
-  let error = "";
-
-  const handleLogin = async () => {
-    error = "";
-
-    if (!email || !password) {
-      error = "Email and password are required.";
-      return;
-    }
-
-    // Placeholder: call your auth logic here
-    try {
-      // Replace with real API call
-      console.log("Logging in:", { email, password });
-      await new Promise((r) => setTimeout(r, 500));
-      goto("/dashboard"); // or wherever
-    } catch (err) {
-      error = "Login failed. Please check your credentials.";
-    }
-  };
+  export let form;
 </script>
 
 <div class="space-y-6 p-4 card preset-tonal-surface shadow-md">
@@ -37,26 +15,20 @@
     </p>
   </div>
 
-  {#if error}
-    <p class="text-sm text-red-500">{error}</p>
+  {#if form?.error}
+    <p class="text-error-500">{form.error}</p>
   {/if}
 
   <form
-    on:submit|preventDefault={handleLogin}
     class=" size-full space-y-6 flex flex-col"
+    method="POST"
+    action="?/login"
   >
     <div class="space-y-4">
-      <Input
-        name="Email"
-        type="email"
-        value={email}
-        placeholder="Enter email..."
-        required
-      />
+      <Input name="Email" type="email" placeholder="Enter email..." required />
       <Input
         name="Password"
         type="password"
-        value={password}
         placeholder="Enter password..."
         required
       />
